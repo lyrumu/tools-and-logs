@@ -10,6 +10,26 @@
 
 ---
 
+## <mark> Git安装</mark>
+
+ 首先cmd打开终端输入
+
+```bash
+where git
+```
+
+判断一下系统有无安装git
+
+没有的话去官网安装即可
+
+[Redirecting&hellip;](https://git-scm.com/download/win)
+
+安装过程~~还挺麻烦的~~
+
+可以一步步问AI该选择哪些选项......
+
+---
+
 
 
 ## <mark>网站选择</mark>
@@ -27,17 +47,11 @@
 以下操作在gitee内进行.
 
 - 初始化仓库：
-  
   (1)选择语言:
-  
   按需或不选，主要是给仓库打上一个“主要编程语言”的标签
-  
   (2)添加.gitigore:
-  
   一般推荐添加，用于告诉git哪些文件不需要管理
-  
   (3)添加开源许可证：
-  
   一般选择`MIT-license`(开源)
 
         
@@ -47,9 +61,7 @@
 
 
 - 设置模板：
-  
   (1)`readme文件`:
-  
   仓库的**门面和说明书**，按需选择，后期可再添加
 
         (2)`issue模板文件`:
@@ -63,25 +75,59 @@
 
 
 - 选择模型分支：
-  
   可以先默认选择“main”或“master”分支
+
+---
+
+
 
 ## <mark>本地文件上传</mark>
 
+本地已有仓库 将其上传gitee 利于保存和管理 防止文件丢失
+
+适用于个人项目
+
+即先本地建立文件 再上传
+
+不过一般是先创建仓库再clone到本地进行开发
 
 
 
+注意！本地已有文件上传时 新建仓库**不要勾选readme**
+
+如果已经勾选了 建议之后使用**强制推送**
+
+![deepseek_mermaid_20251124_980eeb](C:\Users\lyrumu\Desktop\deepseek_mermaid_20251124_980eeb.svg)
+
+```bash
+#先在文件资源管理器中进入所需上传的文件
+#然后右键文件空余处，点击在终端中打开
+#然后确保终端中显示的目录就是当前想要上传的文件，then：
+git init
+#个人开发者的话可以用global全局设置 即所有项目用同一个身份
+git config user.name "你的用户名"
+git config user.email "你的邮箱@example.com"
+#以下具体内容在gitee中复制即可
+git remote add origin https://gitee.com/你的用户名/仓库名.git
+#上传
+git add .
+git commit -m "初始提交：上传项目文件"
+git push -u origin master -f "强制推送(只在初始化时使用)"
+```
 
 
+后续在本地编辑更新完项目后 再更新上传到git：
 
+```bash
+git add .
+git commit -m "更新内容给介绍"
+git push
+```
 
+git配置状态检查：
 
-
-
-
-
-
-
-
-
-
+```bash
+git config --list
+#或者
+git config --global --list
+```
