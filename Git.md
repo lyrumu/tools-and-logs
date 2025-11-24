@@ -93,11 +93,11 @@ where git
 
 
 
-注意！本地已有文件上传时 新建仓库**不要勾选readme**
+注意！选择本地已有的文件上传时 新建仓库**不要勾选readme**
 
-如果已经勾选了 建议之后使用**强制推送**
+因为会导致仓库和本地的初始化内容不统一！
 
-![deepseek_mermaid_20251124_980eeb](C:\Users\lyrumu\Desktop\deepseek_mermaid_20251124_980eeb.svg)
+如果已经勾选了 建议之后使用**强制推送**，使用本地内容覆盖仓库.
 
 ```bash
 #先在文件资源管理器中进入所需上传的文件
@@ -115,7 +115,6 @@ git commit -m "初始提交：上传项目文件"
 git push -u origin master -f "强制推送(只在初始化时使用)"
 ```
 
-
 后续在本地编辑更新完项目后 再更新上传到git：
 
 ```bash
@@ -131,3 +130,43 @@ git config --list
 #或者
 git config --global --list
 ```
+
+---
+
+## <mark>Wrong1</mark>
+
+`wrong`:
+
+由于在gitee上给仓库添加了`license`文件
+
+此时仓库有license文件 但本地并没有
+
+and 我并未记得
+
+直接更新了新的本地内容
+
+于是乎：
+![wrong1](./images/wrong1.png)
+
+在进行`git push`时出现报错
+
+处理方法：
+
+```bash
+git pull origin master#拉取远程仓库的变化文件，并更新到本地
+```
+
+此时终端可能会进入另一个界面，叫做"vim编辑器"，不要慌，
+
+接着先按一下`Esc`键，再输入`:wq`,最后爽按一下`Enter`!
+
+再就会恢复正常了
+
+最后再输入
+
+```bash
+git push origin master
+#或者这里直接用git push更好
+```
+
+
