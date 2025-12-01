@@ -123,13 +123,79 @@ git commit -m "更新内容给介绍"
 git push
 ```
 
-git配置状态检查：
+后期git配置状态检查：
 
 ```bash
 git config --list
 #或者
 git config --global --list
 ```
+
+---
+
+## <mark>多平台同步</mark>
+
+首先进入本地需要同步的文件夹，右键**在终端中打开**
+
+(后续操作均需在此环境下进行)
+
+```bash
+git remote -v#查看当前文件夹关联的所有远程仓库
+```
+
+需要将同一本地文件同步到不同远程仓库时，建议使用**相同的仓库名**（仓库名即为-v后显示的“仓库名.git”）
+
+以下以已经同步到gitee的文件，再同步到github为例：
+
+```bash
+git remote add github https://github.com/用户名/仓库名.git
+```
+
+然后根据**分支名**推送：
+
+```bash
+git push github master
+```
+
+最后再用`git remote -v`检查一下，应该会多出origin之外的仓库
+
+![多平台同步](./images/同步两个git.png)
+
+后续更新时，用以下命令推送到两个仓库：
+
+```bash
+git add .
+git commit -m "内容"
+git push origin master#第一个一般都为origin吧
+git push github master
+```
+
+后期若要定期检查本地和两个仓库同步状态：
+
+```bash
+git status#仅用来检查本地和origin的同步状态
+```
+
+![git status](./images/git%20status.png)
+
+（up to date! 就说明本地和origin是正确同步的）
+
+```bash
+git fetch --all#用来检查三方是否都正确同步，以下一步步执行
+git log --oneline HEAD#本地最新提交
+git log --oneline origin/master#gitee最新提交
+git log --oneline github/master#github最新提交
+```
+
+![git fetch --all](./images/git%20fetch.png)
+
+![log HEAD](./images/gitloghead.png)
+
+![log origin](./images/gitlogorigin.png)
+
+![log github](./images/gitloggithub.png)
+
+检查三个输出内容是否相同即可.
 
 ---
 
@@ -153,20 +219,20 @@ and 我并未记得
 处理方法：
 
 ```bash
-git pull origin master#拉取远程仓库的变化文件，并更新到本地
+git pull origin master#拉取远程仓库的变化更新文件，并合并到本地
 ```
 
 此时终端可能会进入另一个界面，叫做"vim编辑器"，不要慌，
 
-接着先按一下`Esc`键，再输入`:wq`,最后爽按一下`Enter`!
+接着先按一下`Esc`键，再输入`:wq`,最后按一下`Enter` 应该就会恢复正常了.
 
-再就会恢复正常了
-
-最后再输入
+最后再输入：
 
 ```bash
 git push origin master
 #或者这里直接用git push更好
 ```
+
+---
 
 
