@@ -83,21 +83,21 @@ where git
 
 ## <mark>本地文件上传</mark>
 
-本地已有仓库 将其上传gitee 利于保存和管理 防止文件丢失
+本地已有仓库 将其上传gitee 利于保存和管理 防止文件丢失；
 
-适用于个人项目
+适用于个人项目；
 
-即先本地建立文件 再上传
+即先本地建立文件 再上传；
 
-不过一般是先创建仓库再clone到本地进行开发
+不过一般是先创建仓库再clone到本地进行开发；
 
 
 
-注意！选择本地已有的文件上传时 新建仓库**不要勾选readme**
+注：选择本地已有的文件上传时 新建仓库**不要勾选readme和license**
 
-因为会导致仓库和本地的初始化内容不统一！
+因为会导致仓库和本地的初始化内容不统一；
 
-如果已经勾选了 建议之后使用**强制推送**，使用本地内容覆盖仓库.
+如果已经勾选了 建议之后使用**强制推送**，使用本地内容覆盖仓库；
 
 ```bash
 #先在文件资源管理器中进入所需上传的文件
@@ -112,8 +112,18 @@ git remote add origin https://gitee.com/你的用户名/仓库名.git
 #上传
 git add .
 git commit -m "初始提交：上传项目文件"
-git push -u origin master -f "强制推送(只在初始化时使用)"
+git push -u origin master -f #"强制推送(只在个人仓库初始化时使用)"
+#注意，上传github不能用master分支，要用main
+#git push --force-with-lease适合多人开发时使用，防止覆盖他人提交
 ```
+
+push前最好`git branch`查看当前所在分支以及所有本地分支，避免推送到其他分支上，当前所在分支会在前面显示`*`符号
+
+如果分支不匹配，用`git branch -M main`移动到正确分支上
+
+关于获取自己github邮箱：
+
+点击头像->settings->email；
 
 后续在本地编辑更新完项目后 再更新上传到git：
 
@@ -135,7 +145,7 @@ git config --global --list
 
 ## <mark>多平台同步</mark>
 
-首先进入本地需要同步的文件夹，右键**在终端中打开**
+首先进入本地需要同步的文件夹，右键**在终端中打开**；
 
 (后续操作均需在此环境下进行)
 
@@ -143,7 +153,7 @@ git config --global --list
 git remote -v#查看当前文件夹关联的所有远程仓库
 ```
 
-需要将同一本地文件同步到不同远程仓库时，建议使用**相同的仓库名**（仓库名即为-v后显示的“仓库名.git”）在平台先建立相同名称的仓库，不要设置readme等文件
+需要将同一本地文件同步到不同远程仓库时，建议使用**相同的仓库名**（仓库名即为-v后显示的“仓库名.git”）在平台先建立相同名称的仓库，不要设置readme等文件；
 
 以下以已经同步到gitee的文件，再同步到github为例：
 
@@ -157,7 +167,7 @@ git remote add github https://github.com/用户名/仓库名.git
 git push github master
 ```
 
-最后再用`git remote -v`检查一下，应该会多出origin之外的仓库
+最后再用`git remote -v`检查一下，应该会多出origin之外的仓库；
 
 ![多平台同步](./images/同步两个git.png)
 
@@ -178,7 +188,7 @@ git status#仅用来检查本地和origin的同步状态
 
 ![git status](./images/git%20status.png)
 
-（up to date! 就说明本地和origin是正确同步的）
+（up to date! 就说明本地和origin是正确同步的）；
 
 ```bash
 git fetch --all#用来检查三方是否都正确同步，以下一步步执行
@@ -195,7 +205,7 @@ git log --oneline github/master#github最新提交
 
 ![log github](./images/gitloggithub.png)
 
-检查三个输出内容是否相同即可.
+检查三个输出内容是否相同即可；
 
 ---
 
@@ -203,18 +213,18 @@ git log --oneline github/master#github最新提交
 
 `wrong`:
 
-由于在gitee上给仓库添加了`license`文件
+由于在gitee上给仓库添加了`license`文件；
 
-此时仓库有license文件 但本地并没有
+此时仓库有license文件 但本地并没有；
 
-and 我并未记得
+and 我并未记得；
 
-直接更新了新的本地内容
+直接更新了新的本地内容；
 
 于是乎：
 ![wrong1](./images/wrong1.png)
 
-在进行`git push`时出现报错
+在进行`git push`时出现报错；
 
 处理方法：
 
@@ -222,9 +232,9 @@ and 我并未记得
 git pull origin master#拉取远程仓库的变化更新文件，并合并到本地
 ```
 
-此时终端可能会进入另一个界面，叫做"vim编辑器"，不要慌，
+此时终端可能会进入另一个界面，叫做"vim编辑器"；
 
-接着先按一下`Esc`键，再输入`:wq`,最后按一下`Enter` 应该就会恢复正常了.
+此时要先按一下`Esc`键，再输入`:wq`,最后按一下`Enter` 应该就会恢复正常了；
 
 最后再输入：
 
